@@ -42,14 +42,17 @@ static typeof(aarch64_insn_adrp_get_offset) *ci_aarch64_insn_adrp_get_offset;
     }                                                \
   } while (0);
 
+
 /* Linux does not have any function to check for 'bti' instruction. So we
  * define it by ourselves. */
+#if !defined(__aarch64__)
 static inline bool aarch64_insn_is_bti(u32 code)
 {
   u32 mask = 0xFFFFFF3F;
   u32 val = 0xD503241F;
   return (code & mask) == val;
 }
+#endif
 
 /* Depending on the kernel version, locating the syscall table may be more
  * or less straigthforward.

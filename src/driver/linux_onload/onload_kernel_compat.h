@@ -61,7 +61,7 @@ ci_call_usermodehelper(char *path, char **argv, char **envp, int wait);
 #endif
 
 /* is_compat_task() was removed for x86 in linux-4.6 */
-#ifdef EFRM_NEED_IS_COMPAT_TASK
+#if defined(EFRM_NEED_IS_COMPAT_TASK) && !defined(CONFIG_ARM64)
 static inline int is_compat_task(void)
 {
 #if !defined(CONFIG_COMPAT)
